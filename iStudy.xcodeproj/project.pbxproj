@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FF1C8A4D2BAEB03300B4489E /* iStudyFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1C8A4C2BAEB03300B4489E /* iStudyFont.swift */; };
 		FF1C8A4F2BAEB1F000B4489E /* BorderRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1C8A4E2BAEB1F000B4489E /* BorderRadius.swift */; };
+		FF49A4B02BAF481F00950FFD /* EnvironmentValues+iStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF49A4AF2BAF481F00950FFD /* EnvironmentValues+iStudy.swift */; };
 		FF5B2CBE2BADF7FD00B18431 /* iStudyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CBD2BADF7FD00B18431 /* iStudyApp.swift */; };
 		FF5B2CC02BADF7FD00B18431 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CBF2BADF7FD00B18431 /* ProgressView.swift */; };
 		FF5B2CC22BADF7FD00B18431 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CC12BADF7FD00B18431 /* Category.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		FF1C8A4C2BAEB03300B4489E /* iStudyFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iStudyFont.swift; sourceTree = "<group>"; };
 		FF1C8A4E2BAEB1F000B4489E /* BorderRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderRadius.swift; sourceTree = "<group>"; };
+		FF49A4AF2BAF481F00950FFD /* EnvironmentValues+iStudy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+iStudy.swift"; sourceTree = "<group>"; };
 		FF5B2CBA2BADF7FD00B18431 /* iStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF5B2CBD2BADF7FD00B18431 /* iStudyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iStudyApp.swift; sourceTree = "<group>"; };
 		FF5B2CBF2BADF7FD00B18431 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				FF5B2CF82BAE1FAF00B18431 /* Date+iStudy.swift */,
+				FF49A4AF2BAF481F00950FFD /* EnvironmentValues+iStudy.swift */,
 				FF5B2CFE2BAE2EED00B18431 /* View+iStudy.swift */,
 			);
 			path = Extensions;
@@ -353,6 +356,7 @@
 				FF5B2CBE2BADF7FD00B18431 /* iStudyApp.swift in Sources */,
 				FF5B2CFB2BAE204C00B18431 /* PersistenceManager.swift in Sources */,
 				FF5B2CF62BAE0B7700B18431 /* SeedDataManager.swift in Sources */,
+				FF49A4B02BAF481F00950FFD /* EnvironmentValues+iStudy.swift in Sources */,
 				FF5B2CFF2BAE2EED00B18431 /* View+iStudy.swift in Sources */,
 				FF5B2CF92BAE1FAF00B18431 /* Date+iStudy.swift in Sources */,
 			);

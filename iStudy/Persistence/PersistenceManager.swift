@@ -8,6 +8,10 @@
 import SwiftUI
 import SwiftData
 
+struct PersistenceManagerKey: EnvironmentKey {
+    static let defaultValue: PersistenceManager = PersistenceManager()
+}
+
 /// Helper class to interact with a `ModelContext`
 final class PersistenceManager {
     var modelContext: ModelContext?
@@ -69,23 +73,5 @@ final class PersistenceManager {
         }
         
         return nil
-    }
-}
-
-struct PersistenceManagerKey: EnvironmentKey {
-    static let defaultValue: PersistenceManager = PersistenceManager()
-}
-
-// TODO: Move this
-extension EnvironmentValues {
-    var persistenceManager: PersistenceManager {
-        get { self[PersistenceManagerKey.self] }
-        set { self[PersistenceManagerKey.self] = newValue }
-    }
-}
-
-extension View {
-    func persistenceManager(_ manager: PersistenceManager) -> some View {
-        self.environment(\.persistenceManager, manager)
     }
 }
