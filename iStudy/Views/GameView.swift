@@ -16,18 +16,11 @@ struct GameView: View {
     @Query private var prompts: [Prompt]
     @Query private var history: [History]
     
-    @State private var prompt: Prompt?
-    @State private var selection: Choice?
-    @State private var isGameOver: Bool = false
-    @State private var refreshToggle: Bool = false
-    
-    private var isChoiceSubmitted: Bool {
-        selection != nil
-    }
+    @StateObject private var viewModel = GameViewModel()
     
     var body: some View {
         VStack {
-            if isGameOver {
+            if viewModel.isGameOver {
                 gameOverView
             } else {
                 gameView
@@ -38,7 +31,7 @@ struct GameView: View {
         .navigationBarItems(
             leading:
                 Button("Start over") {
-                    startOver()
+                    viewModel.startOver()
                 },
             trailing:
                 NavigationLink(destination: ProgressView()) {
@@ -47,19 +40,27 @@ struct GameView: View {
         )
         .modelContext(modelContext)
         .onAppear {
-            persistenceManager.modelContext = modelContext
-            if prompt == nil {
-                next()
+            if persistenceManager.modelContext == nil || viewModel.persistenceManager == nil {
+                persistenceManager.modelContext = modelContext
+                viewModel.persistenceManager = persistenceManager
+            }
+            
+            viewModel.history = history
+            viewModel.prompts = prompts
+            
+            if viewModel.prompt == nil {
+                viewModel.next()
             }
         }
-        .onChange(of: selection) {
-            guard let selection = selection else { return }
-            choiceSelected(selection)
+        .onChange(of: viewModel.selection) {
+            guard let selection = viewModel.selection else { return }
+            viewModel.choiceSelected(selection)
         }
         .onChange(of: history) {
-            /// A workaround to get the view to refresh the `statsText` after
-            /// a History object is inserted into the context
-            refreshToggle = !refreshToggle
+            viewModel.history = history
+        }
+        .onChange(of: prompts) {
+            viewModel.prompts = prompts
         }
     }
     
@@ -67,29 +68,35 @@ struct GameView: View {
         VStack {
             Text(statsText)
                 .font(.caption)
-                .padding(.vertical, Spacing.large)
+                .padding(.top, Spacing.large)
+                .padding(.bottom, Spacing.xxSmall)
             
-            if let prompt = prompt {
+            Text("\(viewModel.unansweredQuestions) questions left")
+                .font(.caption)
+                .padding(.top, Spacing.xxSmall)
+                .padding(.bottom, Spacing.large)
+            
+            if let prompt = viewModel.prompt {
                 QuestionView(
                     prompt: prompt,
-                    isChoiceSubmitted: isChoiceSubmitted,
-                    selection: $selection
+                    isChoiceSubmitted: viewModel.isChoiceSubmitted,
+                    selection: $viewModel.selection
                 )
                 
                 Spacer()
                 
                 Button(action: {
-                    next()
+                    viewModel.next()
                 }) {
                     Text("Next")
                         .font(.system(size: 15.0))
                         .padding()
                         .frame(maxWidth: .infinity)
                         .foregroundColor(.white)
-                        .background(isChoiceSubmitted ? Color.blue : Color.gray)
+                        .background(viewModel.isChoiceSubmitted ? Color.blue : Color.gray)
                         .cornerRadius(BorderRadius.standard)
                 }
-                .disabled(!isChoiceSubmitted)
+                .disabled(!viewModel.isChoiceSubmitted)
 
                 .padding(.vertical, Spacing.large)
             }
@@ -106,7 +113,7 @@ struct GameView: View {
                 .padding(.bottom, Spacing.large)
             
             Button(action: {
-                startOver()
+                viewModel.startOver()
             }) {
                 Text("Start over")
                     .font(.system(size: 15.0))
@@ -124,43 +131,5 @@ struct GameView: View {
             return stats
         }
         return "Select an answer to start"
-    }
-    
-    private func next() -> Void {
-        let historyPromptIds = Set(history.map { $0.promptId })
-        let availablePrompts = prompts.filter {
-            !historyPromptIds.contains($0.id)
-        }
-        
-        guard availablePrompts.count > 0 else {
-            isGameOver = true
-            return
-        }
-        
-        selection = nil
-        
-        let index = Int.random(in: 0...availablePrompts.count - 1)
-        prompt = availablePrompts[index]
-    }
-    
-    private func choiceSelected(_ choiceSelection: Choice) {
-        guard let prompt = prompt else { return }
-
-        let isCorrect = choiceSelection.isCorrect
-        
-        let history = History(categoryName: prompt.categoryName,
-                              promptId: prompt.id,
-                              isCorrect: isCorrect,
-                              selectedAnswer: choiceSelection.text)
-        modelContext.insert(history)
-    }
-    
-    private func startOver() -> Void {
-        persistenceManager.clearHistory()
-        prompt = nil
-        selection = nil
-        isGameOver = false
-        
-        next()
     }
 }

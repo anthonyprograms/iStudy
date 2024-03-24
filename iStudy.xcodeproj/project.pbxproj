@@ -10,6 +10,7 @@
 		FF1C8A4D2BAEB03300B4489E /* iStudyFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1C8A4C2BAEB03300B4489E /* iStudyFont.swift */; };
 		FF1C8A4F2BAEB1F000B4489E /* BorderRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1C8A4E2BAEB1F000B4489E /* BorderRadius.swift */; };
 		FF49A4B02BAF481F00950FFD /* EnvironmentValues+iStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF49A4AF2BAF481F00950FFD /* EnvironmentValues+iStudy.swift */; };
+		FF49A4B22BB0BB3F00950FFD /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF49A4B12BB0BB3F00950FFD /* GameViewModel.swift */; };
 		FF5B2CBE2BADF7FD00B18431 /* iStudyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CBD2BADF7FD00B18431 /* iStudyApp.swift */; };
 		FF5B2CC02BADF7FD00B18431 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CBF2BADF7FD00B18431 /* ProgressView.swift */; };
 		FF5B2CC22BADF7FD00B18431 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CC12BADF7FD00B18431 /* Category.swift */; };
@@ -52,6 +53,7 @@
 		FF1C8A4C2BAEB03300B4489E /* iStudyFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iStudyFont.swift; sourceTree = "<group>"; };
 		FF1C8A4E2BAEB1F000B4489E /* BorderRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderRadius.swift; sourceTree = "<group>"; };
 		FF49A4AF2BAF481F00950FFD /* EnvironmentValues+iStudy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+iStudy.swift"; sourceTree = "<group>"; };
+		FF49A4B12BB0BB3F00950FFD /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		FF5B2CBA2BADF7FD00B18431 /* iStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF5B2CBD2BADF7FD00B18431 /* iStudyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iStudyApp.swift; sourceTree = "<group>"; };
 		FF5B2CBF2BADF7FD00B18431 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
@@ -109,6 +111,18 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		FF49A4B32BB0BB5300950FFD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FF5B2CF22BAE03E900B18431 /* GameView.swift */,
+				FF49A4B12BB0BB3F00950FFD /* GameViewModel.swift */,
+				FF5B2CBF2BADF7FD00B18431 /* ProgressView.swift */,
+				FF5B2CF02BAE02E900B18431 /* PromptsView.swift */,
+				FFCDFD3B2BAE941C008E88CA /* HistoryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FF5B2CB12BADF7FD00B18431 = {
 			isa = PBXGroup;
 			children = (
@@ -133,10 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				FF5B2CBD2BADF7FD00B18431 /* iStudyApp.swift */,
-				FF5B2CF22BAE03E900B18431 /* GameView.swift */,
-				FF5B2CBF2BADF7FD00B18431 /* ProgressView.swift */,
-				FF5B2CF02BAE02E900B18431 /* PromptsView.swift */,
-				FFCDFD3B2BAE941C008E88CA /* HistoryView.swift */,
+				FF49A4B32BB0BB5300950FFD /* Views */,
 				FF1C8A4B2BAEA78F00B4489E /* Common */,
 				FF5B2D022BAE6D1200B18431 /* Resources */,
 				FF5B2CF72BAE1F9A00B18431 /* Extensions */,
@@ -342,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF49A4B22BB0BB3F00950FFD /* GameViewModel.swift in Sources */,
 				FF5B2D062BAE723C00B18431 /* SystemImages.swift in Sources */,
 				FF1C8A4D2BAEB03300B4489E /* iStudyFont.swift in Sources */,
 				FF5B2CEF2BADFA2600B18431 /* History.swift in Sources */,

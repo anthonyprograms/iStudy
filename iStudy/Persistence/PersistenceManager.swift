@@ -17,7 +17,7 @@ final class PersistenceManager {
     var modelContext: ModelContext?
     
     /// Removes all objects from the DB
-    public func clear() {
+    func clear() {
         do {
             try modelContext?.delete(model: Category.self)
             try modelContext?.delete(model: Prompt.self)
@@ -26,29 +26,6 @@ final class PersistenceManager {
         } catch {
             print("Failed to clear database.")
         }
-    }
-    
-    /// Removes all `History` objects from the DB
-    public func clearHistory() {
-        do {
-            try modelContext?.delete(model: History.self)
-        } catch {
-            print("Failed to reset history.")
-        }
-    }
-    
-    /// Returns the number of questions answered correctly
-    /// If a category is supplied, include the category's name within the predicate
-    func correctHistoryCount(category: Category?) -> Int {
-        var descriptor = FetchDescriptor<History>(predicate: #Predicate { $0.isCorrect })
-        if let category = category {
-            let name = category.name
-            descriptor = FetchDescriptor<History>(predicate: #Predicate {
-                $0.isCorrect && $0.categoryName == name
-            })
-        }
-        
-        return (try? modelContext?.fetchCount(descriptor)) ?? 0
     }
     
     /// Returns the number of correct answers / total answers & that ratio as a percentage
@@ -64,14 +41,72 @@ final class PersistenceManager {
             })
         }
         
-        let totalCount = (try? modelContext?.fetchCount(descriptor)) ?? 0
+        let total = historyCount(descriptor: descriptor)
         
-        if totalCount > 0 {
+        if total > 0 {
             let correctCount = correctHistoryCount(category: category)
-            let percentage = Int((Double(correctCount) / Double(totalCount)) * 100)
-            return "\(correctCount)/\(totalCount) (\(percentage)%)"
+            let percentage = Int((Double(correctCount) / Double(total)) * 100)
+            return "\(correctCount)/\(total) (\(percentage)%)"
         }
         
         return nil
+    }
+    
+    /// Returns the number of total number of unanswered questions
+    func unansweredQuestionsCount() -> Int {
+        let promptsCount = promptsCount(descriptor: FetchDescriptor<Prompt>())
+        
+        if (promptsCount > 0) {
+            let historyCount = historyCount(descriptor: FetchDescriptor<History>())
+            return promptsCount - historyCount
+        }
+        
+        return 0
+    }
+}
+
+// MARK: - Prompts
+
+extension PersistenceManager {
+    /// Returns the prompt count for the descriptor
+    private func promptsCount(descriptor: FetchDescriptor<Prompt>) -> Int {
+        return (try? modelContext?.fetchCount(descriptor)) ?? 0
+    }
+}
+
+// MARK: - History
+
+extension PersistenceManager {
+    /// Returns the number of questions answered correctly
+    /// If a category is supplied, include the category's name within the predicate
+    func correctHistoryCount(category: Category?) -> Int {
+        var descriptor = FetchDescriptor<History>(predicate: #Predicate { $0.isCorrect })
+        if let category = category {
+            let name = category.name
+            descriptor = FetchDescriptor<History>(predicate: #Predicate {
+                $0.isCorrect && $0.categoryName == name
+            })
+        }
+        
+        return historyCount(descriptor: descriptor)
+    }
+    
+    /// Inserts a history object into the model context
+    func insert(history: History) -> Void {
+        modelContext?.insert(history)
+    }
+    
+    /// Removes all `History` objects from the DB
+    func clearHistory() {
+        do {
+            try modelContext?.delete(model: History.self)
+        } catch {
+            print("Failed to reset history.")
+        }
+    }
+    
+    /// Returns the history count for the descriptor
+    private func historyCount(descriptor: FetchDescriptor<History>) -> Int {
+        return (try? modelContext?.fetchCount(descriptor)) ?? 0
     }
 }
