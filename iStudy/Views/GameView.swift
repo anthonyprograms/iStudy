@@ -13,6 +13,7 @@ struct GameView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.persistenceManager) var persistenceManager
         
+    @Query private var categories: [Category]
     @Query private var prompts: [Prompt]
     @Query private var history: [History]
     
@@ -59,9 +60,6 @@ struct GameView: View {
         .onChange(of: history) {
             viewModel.history = history
         }
-        .onChange(of: prompts) {
-            viewModel.prompts = prompts
-        }
     }
     
     private var gameView: some View {
@@ -107,10 +105,18 @@ struct GameView: View {
         VStack {
             Text("Your performance:")
                 .font(.body)
+                .padding(.top, Spacing.large)
                 
             Text(statsText)
                 .font(.title)
                 .padding(.bottom, Spacing.large)
+            
+            ProgressChartView(
+                categories: categories,
+                history: history
+            )
+            
+            Spacer()
             
             Button(action: {
                 viewModel.startOver()
