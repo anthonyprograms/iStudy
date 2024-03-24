@@ -16,7 +16,7 @@ struct ProgressChartData: Identifiable, Equatable {
 }
 
 /// Displays the list of questions that have already been answered in a category
-struct ProgressChartView: View {
+struct ResultChartView: View {
     let categories: [Category]
     let history: [History]
     

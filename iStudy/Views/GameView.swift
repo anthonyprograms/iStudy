@@ -111,7 +111,7 @@ struct GameView: View {
                 .font(.title)
                 .padding(.bottom, Spacing.large)
             
-            ProgressChartView(
+            ResultChartView(
                 categories: categories,
                 history: history
             )

@@ -30,7 +30,7 @@
 		FF5B2D062BAE723C00B18431 /* SystemImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2D052BAE723C00B18431 /* SystemImages.swift */; };
 		FFCDFD3A2BAE83D5008E88CA /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCDFD392BAE83D5008E88CA /* QuestionView.swift */; };
 		FFCDFD3C2BAE941C008E88CA /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCDFD3B2BAE941C008E88CA /* HistoryView.swift */; };
-		FFE2017D2BB0D3FE00A0FC34 /* ProgressChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE2017C2BB0D3FE00A0FC34 /* ProgressChartView.swift */; };
+		FFE2017D2BB0D3FE00A0FC34 /* ResultChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE2017C2BB0D3FE00A0FC34 /* ResultChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +77,7 @@
 		FF5B2D052BAE723C00B18431 /* SystemImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemImages.swift; sourceTree = "<group>"; };
 		FFCDFD392BAE83D5008E88CA /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		FFCDFD3B2BAE941C008E88CA /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
-		FFE2017C2BB0D3FE00A0FC34 /* ProgressChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressChartView.swift; sourceTree = "<group>"; };
+		FFE2017C2BB0D3FE00A0FC34 /* ResultChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,8 +118,8 @@
 			children = (
 				FF5B2CF22BAE03E900B18431 /* GameView.swift */,
 				FF49A4B12BB0BB3F00950FFD /* GameViewModel.swift */,
+				FFE2017C2BB0D3FE00A0FC34 /* ResultChartView.swift */,
 				FF5B2CBF2BADF7FD00B18431 /* ProgressView.swift */,
-				FFE2017C2BB0D3FE00A0FC34 /* ProgressChartView.swift */,
 				FF5B2CF02BAE02E900B18431 /* PromptsView.swift */,
 				FFCDFD3B2BAE941C008E88CA /* HistoryView.swift */,
 			);
@@ -374,7 +374,7 @@
 				FF49A4B02BAF481F00950FFD /* EnvironmentValues+iStudy.swift in Sources */,
 				FF5B2CFF2BAE2EED00B18431 /* View+iStudy.swift in Sources */,
 				FF5B2CF92BAE1FAF00B18431 /* Date+iStudy.swift in Sources */,
-				FFE2017D2BB0D3FE00A0FC34 /* ProgressChartView.swift in Sources */,
+				FFE2017D2BB0D3FE00A0FC34 /* ResultChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
