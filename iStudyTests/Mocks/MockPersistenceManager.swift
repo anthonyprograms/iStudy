@@ -21,6 +21,15 @@ final class MockPersistenceManager: PersistenceManagerInterface {
         return 20
     }
     
+    var cachedCategories = [iStudy.Category]()
+    func categories() -> [iStudy.Category] {
+        return cachedCategories
+    }
+    
+    func insert(category: iStudy.Category) {
+        
+    }
+    
     private(set) var insertedHistory: [iStudy.History] = []
     func insert(history: iStudy.History) {
         insertedHistory.append(history)

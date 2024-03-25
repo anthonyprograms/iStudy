@@ -13,18 +13,24 @@ struct GameView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.persistenceManager) var persistenceManager
         
-    @Query private var categories: [Category]
-    @Query private var prompts: [Prompt]
     @Query private var history: [History]
     
     @StateObject private var viewModel = GameViewModel()
     
+    /// Used for testing — we don't want to invoke `.onAppear` or `.task` methods if this value is false
+    let shouldActivateGameView: Bool
+    
     var body: some View {
         VStack {
-            if viewModel.isGameOver {
-                gameOverView
+            if viewModel.isLoading {
+                SwiftUI.ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
             } else {
-                gameView
+                if viewModel.isGameOver {
+                    gameOverView
+                } else {
+                    gameView
+                }
             }
         }
         .padding(.horizontal, Spacing.medium)
@@ -41,17 +47,14 @@ struct GameView: View {
         )
         .modelContext(modelContext)
         .onAppear {
+            guard shouldActivateGameView else  { return }
+            
             if persistenceManager.modelContext == nil || viewModel.persistenceManager == nil {
                 persistenceManager.modelContext = modelContext
                 viewModel.persistenceManager = persistenceManager
             }
-            
+                        
             viewModel.history = history
-            viewModel.prompts = prompts
-            
-            if viewModel.prompt == nil {
-                viewModel.next()
-            }            
         }
         .onChange(of: viewModel.selection) {
             guard let selection = viewModel.selection else { return }
@@ -59,6 +62,10 @@ struct GameView: View {
         }
         .onChange(of: history) {
             viewModel.history = history
+        }
+        .task {
+            guard shouldActivateGameView else  { return }
+            await viewModel.fetchData()
         }
     }
     
@@ -112,7 +119,7 @@ struct GameView: View {
                 .padding(.bottom, Spacing.large)
             
             ResultChartView(
-                categories: categories,
+                categories: viewModel.categories,
                 history: history
             )
             

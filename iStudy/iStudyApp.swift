@@ -21,7 +21,6 @@ struct iStudyApp: App {
 
         do {
             let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
-            SeedDataManager.seedDatabase(container: container)
             return container
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
@@ -31,7 +30,8 @@ struct iStudyApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                GameView()
+                let isTesting = ProcessInfo.processInfo.arguments.contains("IS_TESTING")
+                GameView(shouldActivateGameView: !isTesting)
             }
         }
         .modelContainer(sharedModelContainer)

@@ -22,7 +22,6 @@
 		FF5B2CEF2BADFA2600B18431 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CEE2BADFA2600B18431 /* History.swift */; };
 		FF5B2CF12BAE02E900B18431 /* PromptsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CF02BAE02E900B18431 /* PromptsView.swift */; };
 		FF5B2CF32BAE03E900B18431 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CF22BAE03E900B18431 /* GameView.swift */; };
-		FF5B2CF62BAE0B7700B18431 /* SeedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CF52BAE0B7700B18431 /* SeedDataManager.swift */; };
 		FF5B2CF92BAE1FAF00B18431 /* Date+iStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CF82BAE1FAF00B18431 /* Date+iStudy.swift */; };
 		FF5B2CFB2BAE204C00B18431 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CFA2BAE204C00B18431 /* PersistenceManager.swift */; };
 		FF5B2CFF2BAE2EED00B18431 /* View+iStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5B2CFE2BAE2EED00B18431 /* View+iStudy.swift */; };
@@ -35,6 +34,10 @@
 		FFE201882BB119DF00A0FC34 /* PromptsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201872BB119DF00A0FC34 /* PromptsViewModel.swift */; };
 		FFE2018A2BB11F7700A0FC34 /* GameViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201892BB11F7700A0FC34 /* GameViewModelTests.swift */; };
 		FFE2018E2BB120A300A0FC34 /* MockPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE2018D2BB120A300A0FC34 /* MockPersistenceManager.swift */; };
+		FFE201912BB12D8B00A0FC34 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201902BB12D8B00A0FC34 /* NetworkManager.swift */; };
+		FFE201932BB1312700A0FC34 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201922BB1312700A0FC34 /* Prompt.swift */; };
+		FFE201952BB1313900A0FC34 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201942BB1313900A0FC34 /* Choice.swift */; };
+		FFE201972BB1330D00A0FC34 /* defaults.json in Resources */ = {isa = PBXBuildFile; fileRef = FFE201962BB1330D00A0FC34 /* defaults.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +76,6 @@
 		FF5B2CEE2BADFA2600B18431 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		FF5B2CF02BAE02E900B18431 /* PromptsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsView.swift; sourceTree = "<group>"; };
 		FF5B2CF22BAE03E900B18431 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		FF5B2CF52BAE0B7700B18431 /* SeedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedDataManager.swift; sourceTree = "<group>"; };
 		FF5B2CF82BAE1FAF00B18431 /* Date+iStudy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+iStudy.swift"; sourceTree = "<group>"; };
 		FF5B2CFA2BAE204C00B18431 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		FF5B2CFE2BAE2EED00B18431 /* View+iStudy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+iStudy.swift"; sourceTree = "<group>"; };
@@ -86,6 +88,10 @@
 		FFE201872BB119DF00A0FC34 /* PromptsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsViewModel.swift; sourceTree = "<group>"; };
 		FFE201892BB11F7700A0FC34 /* GameViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelTests.swift; sourceTree = "<group>"; };
 		FFE2018D2BB120A300A0FC34 /* MockPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPersistenceManager.swift; sourceTree = "<group>"; };
+		FFE201902BB12D8B00A0FC34 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FFE201922BB1312700A0FC34 /* Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
+		FFE201942BB1313900A0FC34 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
+		FFE201962BB1330D00A0FC34 /* defaults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = defaults.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +167,7 @@
 				FF5B2D022BAE6D1200B18431 /* Resources */,
 				FF5B2CF72BAE1F9A00B18431 /* Extensions */,
 				FF5B2CE92BADF92400B18431 /* Models */,
+				FFE2018F2BB12D6D00A0FC34 /* Networking */,
 				FF5B2CF42BAE0B4B00B18431 /* Persistence */,
 				FF5B2CC32BADF7FE00B18431 /* Assets.xcassets */,
 				FF5B2CC52BADF7FE00B18431 /* Preview Content */,
@@ -199,7 +206,9 @@
 			isa = PBXGroup;
 			children = (
 				FF5B2CC12BADF7FD00B18431 /* Category.swift */,
+				FFE201942BB1313900A0FC34 /* Choice.swift */,
 				FF5B2CEE2BADFA2600B18431 /* History.swift */,
+				FFE201922BB1312700A0FC34 /* Prompt.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -207,7 +216,7 @@
 		FF5B2CF42BAE0B4B00B18431 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				FF5B2CF52BAE0B7700B18431 /* SeedDataManager.swift */,
+				FFE201962BB1330D00A0FC34 /* defaults.json */,
 				FF5B2CFA2BAE204C00B18431 /* PersistenceManager.swift */,
 				FFE201802BB0DF8A00A0FC34 /* Models */,
 			);
@@ -284,6 +293,14 @@
 				FFE2018D2BB120A300A0FC34 /* MockPersistenceManager.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		FFE2018F2BB12D6D00A0FC34 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				FFE201902BB12D8B00A0FC34 /* NetworkManager.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,6 +407,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFE201972BB1330D00A0FC34 /* defaults.json in Resources */,
 				FF5B2CC72BADF7FE00B18431 /* Preview Assets.xcassets in Resources */,
 				FF5B2CC42BADF7FE00B18431 /* Assets.xcassets in Resources */,
 			);
@@ -420,6 +438,7 @@
 				FF5B2D062BAE723C00B18431 /* SystemImages.swift in Sources */,
 				FF1C8A4D2BAEB03300B4489E /* iStudyFont.swift in Sources */,
 				FF5B2CEF2BADFA2600B18431 /* History.swift in Sources */,
+				FFE201912BB12D8B00A0FC34 /* NetworkManager.swift in Sources */,
 				FF1C8A4F2BAEB1F000B4489E /* BorderRadius.swift in Sources */,
 				FF5B2D042BAE6D1D00B18431 /* Spacing.swift in Sources */,
 				FF5B2CC02BADF7FD00B18431 /* ProgressView.swift in Sources */,
@@ -432,11 +451,12 @@
 				FF5B2CF32BAE03E900B18431 /* GameView.swift in Sources */,
 				FF5B2CBE2BADF7FD00B18431 /* iStudyApp.swift in Sources */,
 				FF5B2CFB2BAE204C00B18431 /* PersistenceManager.swift in Sources */,
-				FF5B2CF62BAE0B7700B18431 /* SeedDataManager.swift in Sources */,
+				FFE201952BB1313900A0FC34 /* Choice.swift in Sources */,
 				FF49A4B02BAF481F00950FFD /* EnvironmentValues+iStudy.swift in Sources */,
 				FF5B2CFF2BAE2EED00B18431 /* View+iStudy.swift in Sources */,
 				FF5B2CF92BAE1FAF00B18431 /* Date+iStudy.swift in Sources */,
 				FFE2017D2BB0D3FE00A0FC34 /* ResultChartView.swift in Sources */,
+				FFE201932BB1312700A0FC34 /* Prompt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@ struct QuestionView: View {
     @Binding var selection: Choice?
     
     var body: some View {
-        VStack {
+        ScrollView {
             Text(prompt.question)
                 .font(iStudyFont.question)
                 .padding(.top, Spacing.small)
@@ -31,6 +31,7 @@ struct QuestionView: View {
                     .padding()
             }
         }
+        .scrollBounceBehavior(.basedOnSize)
     }
     
     private func createButtonViews(choices: [Choice]) -> some View {

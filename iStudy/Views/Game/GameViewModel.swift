@@ -9,16 +9,16 @@ import SwiftUI
 
 class GameViewModel: ObservableObject {
     var persistenceManager: PersistenceManagerInterface?
-     
-    var prompts: [Prompt] = []
-    var history: [History] = [] {
-        didSet { toggleRefresh() }
-    }
     
+    var history: [History] = []
+    var categories: [Category] = []
+    
+    @Published private(set) var isLoading: Bool = true
     @Published private(set) var isGameOver: Bool = false
     @Published private(set) var prompt: Prompt?
-    @Published private(set) var refreshToggle: Bool = false
     @Published var selection: Choice?
+    
+    private var dataFetched = false
     
     var isChoiceSubmitted: Bool {
         selection != nil
@@ -28,9 +28,37 @@ class GameViewModel: ObservableObject {
         persistenceManager?.unansweredQuestionsCount() ?? 0
     }
     
-    func next() -> Void {
+    /// Fetches categories from the DB
+    /// if empty, fetches from the network
+    func fetchData() async {
+        guard !dataFetched else { return }
+        dataFetched = true
+        
+        let cachedCategories = persistenceManager?.categories() ?? []
+        
+        // If there are no categories in the cache, fetch them from the network
+        if cachedCategories.count == 0, let categories = try? await NetworkManager.fetchData() {
+            DispatchQueue.main.async { [weak self] in
+                for category in categories {
+                    self?.persistenceManager?.insert(category: category)
+                }
+                self?.categories = categories
+            }
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                self?.categories = cachedCategories
+            }
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.isLoading = false
+            self?.next()
+        }
+    }
+    
+    func next() -> Void {        
         let historyPromptIds = Set(history.map { $0.promptId })
-        let availablePrompts = prompts.filter {
+        let availablePrompts = categories.compactMap { $0.prompts }.flatMap { $0 }.filter {
             !historyPromptIds.contains($0.id)
         }
         
@@ -63,11 +91,5 @@ class GameViewModel: ObservableObject {
         
         selection = nil
         isGameOver = false
-    }
-    
-    /// A workaround to get the view to refresh the `statsText` after
-    /// a History object is inserted into the context
-    private func toggleRefresh() -> Void {
-        refreshToggle = !refreshToggle
     }
 }

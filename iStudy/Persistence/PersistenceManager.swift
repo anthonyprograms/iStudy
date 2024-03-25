@@ -15,6 +15,10 @@ protocol PersistenceManagerInterface {
     
     func unansweredQuestionsCount() -> Int
     
+    func categories() -> [Category]
+        
+    func insert(category: Category) -> Void
+    
     func insert(history: History) -> Void
     
     func clearHistory()
@@ -66,7 +70,18 @@ final class PersistenceManager: PersistenceManagerInterface {
         return 0
     }
     
-    /// Inserts a history object into the model context
+    /// Returns all`Category` rows that exist
+    func categories() -> [Category] {
+        let descriptor = FetchDescriptor<Category>()
+        return (try? modelContext?.fetch(descriptor)) ?? []
+    }
+    
+    /// Inserts a `Category` object into the model context
+    func insert(category: Category) -> Void {
+        modelContext?.insert(category)
+    }
+    
+    /// Inserts a `History` object into the model context
     func insert(history: History) -> Void {
         modelContext?.insert(history)
     }

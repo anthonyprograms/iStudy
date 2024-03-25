@@ -19,7 +19,7 @@ struct ProgressView: View {
 
     var body: some View {
         VStack {
-            if let statsText {
+            if let statsText = statsText(category: nil) {
                 Text(statsText)
                     .font(.caption)
                     .padding()
@@ -43,15 +43,20 @@ struct ProgressView: View {
             
             Spacer()
             
-            if let statsText {
+            if let statsText = statsText(category: category) {
                 Text(statsText)
                     .font(.caption)
             }
         }
     }
     
-    private var statsText: String? {
-        let result = persistenceManager.historyStats()
+    private func statsText(category: Category?) -> String? {
+        let result: PersistenceManager.HistoryStatsResult
+        if let category = category {
+            result = persistenceManager.historyStats(category: category)
+        } else {
+            result = persistenceManager.historyStats()
+        }
         
         if result.total == 0 {
             return nil
