@@ -38,7 +38,10 @@ extension PersistenceManager {
     }
     
     struct HistoryStatsResult {
-        let resultCount: Int
+        /// The number of questions answered correctly
+        let correct: Int
+        
+        /// The number of questions answered
         let total: Int
     }
 }

@@ -38,6 +38,7 @@
 		FFE201932BB1312700A0FC34 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201922BB1312700A0FC34 /* Prompt.swift */; };
 		FFE201952BB1313900A0FC34 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201942BB1313900A0FC34 /* Choice.swift */; };
 		FFE201972BB1330D00A0FC34 /* defaults.json in Resources */ = {isa = PBXBuildFile; fileRef = FFE201962BB1330D00A0FC34 /* defaults.json */; };
+		FFE201992BB209DD00A0FC34 /* QuestionsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201982BB209DD00A0FC34 /* QuestionsCount.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		FFE201922BB1312700A0FC34 /* Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 		FFE201942BB1313900A0FC34 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		FFE201962BB1330D00A0FC34 /* defaults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = defaults.json; sourceTree = "<group>"; };
+		FFE201982BB209DD00A0FC34 /* QuestionsCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsCount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				FFE201812BB0DF9C00A0FC34 /* HistoryStatsResult.swift */,
+				FFE201982BB209DD00A0FC34 /* QuestionsCount.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				FF5B2CC22BADF7FD00B18431 /* Category.swift in Sources */,
 				FF5B2CF12BAE02E900B18431 /* PromptsView.swift in Sources */,
 				FFE201822BB0DF9C00A0FC34 /* HistoryStatsResult.swift in Sources */,
+				FFE201992BB209DD00A0FC34 /* QuestionsCount.swift in Sources */,
 				FFCDFD3A2BAE83D5008E88CA /* QuestionView.swift in Sources */,
 				FFE201882BB119DF00A0FC34 /* PromptsViewModel.swift in Sources */,
 				FFCDFD3C2BAE941C008E88CA /* HistoryView.swift in Sources */,

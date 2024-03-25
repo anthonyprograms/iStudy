@@ -76,6 +76,8 @@ struct GameView: View {
                 .padding(.top, Spacing.large)
                 .padding(.bottom, Spacing.xxSmall)
             
+            SwiftUI.ProgressView(value: percentageGameComplete)
+            
             Text(statsText)
                 .font(.caption)
                 .padding(.top, Spacing.xxSmall)
@@ -140,13 +142,27 @@ struct GameView: View {
     }
     
     private var statsText: String {
-        let result = persistenceManager.historyStats()
+        let result = persistenceManager.historyStats(
+            correctType: .isCorrect(true),
+            totalType: .none
+        )
         
         if result.total == 0 {
             return "Select an answer to continue"
         }
         
-        let percentage = Int((Double(result.resultCount) / Double(result.total)) * 100)
-        return "\(result.resultCount)/\(result.total) (\(percentage)%)"
+        let percentage = Int((Double(result.correct) / Double(result.total)) * 100)
+        return "\(result.correct)/\(result.total) (\(Int(percentage))%)"
+    }
+    
+    private var percentageGameComplete: Double {
+        let result = persistenceManager.questionsCount()
+        
+        if result.total == 0 {
+            return 0
+        }
+        
+        let percentage = Double(result.answered) / Double(result.total)
+        return percentage
     }
 }

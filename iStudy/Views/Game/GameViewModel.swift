@@ -25,7 +25,7 @@ class GameViewModel: ObservableObject {
     }
     
     var unansweredQuestions: Int {
-        persistenceManager?.unansweredQuestionsCount() ?? 0
+        persistenceManager?.questionsCount().left ?? 0
     }
     
     /// Fetches categories from the DB
@@ -58,7 +58,8 @@ class GameViewModel: ObservableObject {
     
     func next() -> Void {        
         let historyPromptIds = Set(history.map { $0.promptId })
-        let availablePrompts = categories.compactMap { $0.prompts }.flatMap { $0 }.filter {
+        let prompts = categories.map {$0.prompts }
+        let availablePrompts = prompts.flatMap { $0 }.filter {
             !historyPromptIds.contains($0.id)
         }
         

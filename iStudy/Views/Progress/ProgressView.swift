@@ -53,16 +53,22 @@ struct ProgressView: View {
     private func statsText(category: Category?) -> String? {
         let result: PersistenceManager.HistoryStatsResult
         if let category = category {
-            result = persistenceManager.historyStats(category: category)
+            result = persistenceManager.historyStats(
+                correctType: .isCorrectAndCategory(true, category),
+                totalType: .category(category)
+            )
         } else {
-            result = persistenceManager.historyStats()
+            result = persistenceManager.historyStats(
+                correctType: .isCorrect(true),
+                totalType: .none
+            )
         }
         
         if result.total == 0 {
             return nil
         }
         
-        let percentage = Int((Double(result.resultCount) / Double(result.total)) * 100)
-        return "\(result.resultCount)/\(result.total) (\(percentage)%)"
+        let percentage = Int((Double(result.correct) / Double(result.total)) * 100)
+        return "\(result.correct)/\(result.total) (\(percentage)%)"
     }
 }

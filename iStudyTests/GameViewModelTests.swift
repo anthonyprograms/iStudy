@@ -106,40 +106,71 @@ private extension GameViewModelTests {
 // MARK: - Models
 
 private extension GameViewModelTests {
+    var categoryName: String {
+        return "SwiftUI"
+    }
+    
     var categories: [iStudy.Category] {
         return [
-            Category(name: "SwiftUI", prompts: prompts)
+            Category(name: categoryName, prompts: prompts)
         ]
     }
     
     var prompts: [Prompt] {
+        let categoryName = categoryName
+        let promptId_1 = "P001"
+        let promptId_2 = "P002"
+        
         return [
-            Prompt(categoryName: "SwiftUI",  id: "P001", question: "What is the primary benefit of using SwiftUI for iOS app development?", choices: [
-                Choice(promptId: "P001", text: "Improved performance", isCorrect: false),
-                Choice(promptId: "P001", text: "Reduced development time", isCorrect: true),
-                Choice(promptId: "P001", text: "Better backward compatibility", isCorrect: false),
-                Choice(promptId: "P001", text: "Enhanced security", isCorrect: false),
-            ], explanation: "SwiftUI simplifies the process of building user interfaces by using a declarative syntax and providing built-in tools for common tasks, which can significantly reduce the amount of code needed and speed up development time."),
-            Prompt(categoryName: "SwiftUI",  id: "P002", question: "How can you create a button with SwiftUI?", choices: [
-                Choice(promptId: "P002", text: "Using UIButton class", isCorrect: false),
-                Choice(promptId: "P002", text: "Using UILabel class", isCorrect: false),
-                Choice(promptId: "P002", text: "Using Text view with onTapGesture modifier", isCorrect: true),
-                Choice(promptId: "P002", text: "Using UIImageView class", isCorrect: false),
-            ], explanation: "In SwiftUI, you can create a button using a Text view and apply the onTapGesture modifier to detect taps and trigger actions. This approach provides a simple and flexible way to create interactive elements in SwiftUI interfaces.")
+            Prompt(
+                categoryName: categoryName,
+                id: promptId_1,
+                question: "What is the primary benefit of using SwiftUI for iOS app development?",
+                choices: [
+                    Choice(promptId: promptId_1, text: "Improved performance", isCorrect: false),
+                    Choice(promptId: promptId_1, text: "Reduced development time", isCorrect: true),
+                    Choice(promptId: promptId_1, text: "Better backward compatibility", isCorrect: false),
+                    Choice(promptId: promptId_1, text: "Enhanced security", isCorrect: false),
+                ],
+                explanation: "SwiftUI simplifies the process of building user interfaces by using a declarative syntax and providing built-in tools for common tasks, which can significantly reduce the amount of code needed and speed up development time."),
+            Prompt(
+                categoryName: categoryName,
+                id: promptId_2,
+                question: "How can you create a button with SwiftUI?",
+                choices: [
+                    Choice(promptId: promptId_2, text: "Using UIButton class", isCorrect: false),
+                    Choice(promptId: promptId_2, text: "Using UILabel class", isCorrect: false),
+                    Choice(promptId: promptId_2, text: "Using Text view with onTapGesture modifier", isCorrect: true),
+                    Choice(promptId: promptId_2, text: "Using UIImageView class", isCorrect: false),
+                ],
+                explanation: "In SwiftUI, you can create a button using a Text view and apply the onTapGesture modifier to detect taps and trigger actions. This approach provides a simple and flexible way to create interactive elements in SwiftUI interfaces.")
         ]
     }
     
     var choice: Choice {
-        return Choice(promptId: "P001", text: "Reduced development time", isCorrect: true)
+        let prompt = prompts[1]
+        let text = prompt.choices[0].text
+        let isCorrect = prompt.choices[0].isCorrect
+        
+        return Choice(
+            promptId: prompt.id,
+            text: text,
+            isCorrect: isCorrect
+        )
     }
     
     var history: [History] {
         let prompt = prompts[1]
+        let text = prompt.choices[0].text
+        let isCorrect = prompt.choices[0].isCorrect
+        
         return [
-            History(categoryName: prompt.categoryName,
-                    promptId: prompt.id,
-                    isCorrect: true,
-                    selectedAnswer: "Using Text view with onTapGesture modifier")
+            History(
+                categoryName: prompt.categoryName,
+                promptId: prompt.id,
+                isCorrect: isCorrect,
+                selectedAnswer: text
+            )
         ]
     }
 }

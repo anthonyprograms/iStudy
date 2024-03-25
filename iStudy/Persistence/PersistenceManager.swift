@@ -9,19 +9,20 @@ import SwiftUI
 import SwiftData
 
 protocol PersistenceManagerInterface {
-    func historyStats() -> PersistenceManager.HistoryStatsResult
-    
-    func historyStats(category: Category) -> PersistenceManager.HistoryStatsResult
-    
-    func unansweredQuestionsCount() -> Int
-    
     func categories() -> [Category]
-        
+    
     func insert(category: Category) -> Void
     
     func insert(history: History) -> Void
     
     func clearHistory()
+    
+    func historyStats(
+        correctType: PersistenceManager.HistoryStatsType,
+        totalType: PersistenceManager.HistoryStatsType
+    ) -> PersistenceManager.HistoryStatsResult
+    
+    func questionsCount() -> PersistenceManager.QuestionsCount
 }
 
 /// Helper class to interact with a `ModelContext`
@@ -40,35 +41,7 @@ final class PersistenceManager: PersistenceManagerInterface {
         }
     }
     
-    /// Returns the number of correct answers / total answers & that ratio as a percentage
-    /// e.g. 3/4 (75%)
-    /// If a category is supplied, include the category's name within the predicate
-    func historyStats() -> HistoryStatsResult {
-        let total = historyCount(descriptor: HistoryStatsType.none.descriptor)
-        let correctCount = historyCount(descriptor: HistoryStatsType.isCorrect(true).descriptor)
-        return HistoryStatsResult(resultCount: correctCount, total: total)
-    }
-    
-    /// Returns the number of correct answers / total answers & that ratio as a percentage
-    /// e.g. 3/4 (75%)
-    /// If a category is supplied, include the category's name within the predicate
-    func historyStats(category: Category) -> HistoryStatsResult {
-        let total = historyCount(descriptor: HistoryStatsType.category(category).descriptor)
-        let correctCount = historyCount(descriptor: HistoryStatsType.isCorrectAndCategory(true, category).descriptor)
-        return HistoryStatsResult(resultCount: correctCount, total: total)
-    }
-    
-    /// Returns the number of total number of unanswered questions
-    func unansweredQuestionsCount() -> Int {
-        let promptsCount = promptsCount(descriptor: FetchDescriptor<Prompt>())
-        
-        if (promptsCount > 0) {
-            let historyCount = historyCount(descriptor: FetchDescriptor<History>())
-            return promptsCount - historyCount
-        }
-        
-        return 0
-    }
+    // MARK: - Category
     
     /// Returns all`Category` rows that exist
     func categories() -> [Category] {
@@ -80,6 +53,8 @@ final class PersistenceManager: PersistenceManagerInterface {
     func insert(category: Category) -> Void {
         modelContext?.insert(category)
     }
+    
+    // MARK: - History
     
     /// Inserts a `History` object into the model context
     func insert(history: History) -> Void {
@@ -93,6 +68,34 @@ final class PersistenceManager: PersistenceManagerInterface {
         } catch {
             print("Failed to reset history.")
         }
+    }
+    
+    // MARK: - Question Count
+    
+    /// Returns the number of total number of unanswered questions
+    func questionsCount() -> QuestionsCount {
+        let total = promptsCount(descriptor: FetchDescriptor<Prompt>())
+        
+        var answered: Int = 0
+        var left: Int = 0
+        
+        if (total > 0) {
+            answered = historyCount(descriptor: FetchDescriptor<History>())
+            left = total - answered
+        }
+        
+        return QuestionsCount(total: total, answered: answered, left: left)
+    }
+    
+    // MARK: - History Stats
+    
+    /// Returns the number of correct answers / total answers & that ratio as a percentage
+    /// e.g. 3/4 (75%)
+    /// If a category is supplied, include the category's name within the predicate
+    func historyStats(correctType: HistoryStatsType, totalType: HistoryStatsType) -> HistoryStatsResult {
+        let total = historyCount(descriptor: totalType.descriptor)
+        let correctCount = historyCount(descriptor: correctType.descriptor)
+        return HistoryStatsResult(correct: correctCount, total: total)
     }
 }
 
