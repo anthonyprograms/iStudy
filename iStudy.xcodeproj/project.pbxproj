@@ -33,6 +33,8 @@
 		FFE2017D2BB0D3FE00A0FC34 /* ResultChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE2017C2BB0D3FE00A0FC34 /* ResultChartView.swift */; };
 		FFE201822BB0DF9C00A0FC34 /* HistoryStatsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201812BB0DF9C00A0FC34 /* HistoryStatsResult.swift */; };
 		FFE201882BB119DF00A0FC34 /* PromptsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201872BB119DF00A0FC34 /* PromptsViewModel.swift */; };
+		FFE2018A2BB11F7700A0FC34 /* GameViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201892BB11F7700A0FC34 /* GameViewModelTests.swift */; };
+		FFE2018E2BB120A300A0FC34 /* MockPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE2018D2BB120A300A0FC34 /* MockPersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,8 @@
 		FFE2017C2BB0D3FE00A0FC34 /* ResultChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultChartView.swift; sourceTree = "<group>"; };
 		FFE201812BB0DF9C00A0FC34 /* HistoryStatsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStatsResult.swift; sourceTree = "<group>"; };
 		FFE201872BB119DF00A0FC34 /* PromptsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsViewModel.swift; sourceTree = "<group>"; };
+		FFE201892BB11F7700A0FC34 /* GameViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelTests.swift; sourceTree = "<group>"; };
+		FFE2018D2BB120A300A0FC34 /* MockPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				FF5B2CD02BADF7FE00B18431 /* iStudyTests.swift */,
+				FFE201892BB11F7700A0FC34 /* GameViewModelTests.swift */,
+				FFE2018C2BB1209700A0FC34 /* Mocks */,
 			);
 			path = iStudyTests;
 			sourceTree = "<group>";
@@ -270,6 +276,14 @@
 				FFCDFD3B2BAE941C008E88CA /* HistoryView.swift */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		FFE2018C2BB1209700A0FC34 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				FFE2018D2BB120A300A0FC34 /* MockPersistenceManager.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,7 +444,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFE2018A2BB11F7700A0FC34 /* GameViewModelTests.swift in Sources */,
 				FF5B2CD12BADF7FE00B18431 /* iStudyTests.swift in Sources */,
+				FFE2018E2BB120A300A0FC34 /* MockPersistenceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

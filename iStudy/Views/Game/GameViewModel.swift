@@ -15,10 +15,10 @@ class GameViewModel: ObservableObject {
         didSet { toggleRefresh() }
     }
     
-    @Published var prompt: Prompt?
+    @Published private(set) var isGameOver: Bool = false
+    @Published private(set) var prompt: Prompt?
+    @Published private(set) var refreshToggle: Bool = false
     @Published var selection: Choice?
-    @Published var isGameOver: Bool = false
-    @Published var refreshToggle: Bool = false
     
     var isChoiceSubmitted: Bool {
         selection != nil
@@ -63,7 +63,6 @@ class GameViewModel: ObservableObject {
         
         selection = nil
         isGameOver = false
-        
     }
     
     /// A workaround to get the view to refresh the `statsText` after
