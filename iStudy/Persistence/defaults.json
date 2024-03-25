@@ -344,7 +344,7 @@
         "name": "Core Data",
         "prompts": [
             {
-                "categoryName": "CoreData",
+                "categoryName": "Core Data",
                 "id": "P101",
                 "question": "What is Core Data used for in iOS development?",
                 "choices": [
@@ -372,7 +372,7 @@
                 "explanation": "Core Data is a framework provided by Apple for managing the model layer of an iOS app and enabling data persistence."
             },
             {
-                "categoryName": "CoreData",
+                "categoryName": "Core Data",
                 "id": "P102",
                 "question": "What is the primary entity in a Core Data data model called?",
                 "choices": [
@@ -400,7 +400,7 @@
                 "explanation": "In Core Data, the primary entity in a data model is called an Entity, which represents a type of object that can be persisted to a data store."
             },
             {
-                "categoryName": "CoreData",
+                "categoryName": "Core Data",
                 "id": "P103",
                 "question": "Which type of data store does Core Data primarily use for data persistence on iOS devices?",
                 "choices": [
@@ -428,7 +428,7 @@
                 "explanation": "Core Data primarily uses SQLite as the underlying data store for data persistence on iOS devices, providing efficient storage and retrieval of data."
             },
             {
-                "categoryName": "CoreData",
+                "categoryName": "Core Data",
                 "id": "P104",
                 "question": "What is the purpose of an NSManagedObject subclass in Core Data?",
                 "choices": [
@@ -456,7 +456,7 @@
                 "explanation": "An NSManagedObject subclass in Core Data is used to represent an instance of a managed object, providing properties and methods for accessing and manipulating data stored in the data store."
             },
             {
-                "categoryName": "CoreData",
+                "categoryName": "Core Data",
                 "id": "P105",
                 "question": "How do you perform fetch requests in Core Data?",
                 "choices": [
@@ -484,7 +484,7 @@
                 "explanation": "In Core Data, you perform fetch requests using NSFetchRequest, which allows you to specify criteria for fetching managed objects from the data store."
             },
             {
-              "categoryName": "CoreData",
+              "categoryName": "Core Data",
               "id": "P108",
               "question": "What is the purpose of the NSPersistentContainer class in Core Data?",
               "choices": [
