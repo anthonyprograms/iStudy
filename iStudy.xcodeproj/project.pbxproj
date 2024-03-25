@@ -31,6 +31,8 @@
 		FFCDFD3A2BAE83D5008E88CA /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCDFD392BAE83D5008E88CA /* QuestionView.swift */; };
 		FFCDFD3C2BAE941C008E88CA /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCDFD3B2BAE941C008E88CA /* HistoryView.swift */; };
 		FFE2017D2BB0D3FE00A0FC34 /* ResultChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE2017C2BB0D3FE00A0FC34 /* ResultChartView.swift */; };
+		FFE201822BB0DF9C00A0FC34 /* HistoryStatsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201812BB0DF9C00A0FC34 /* HistoryStatsResult.swift */; };
+		FFE201882BB119DF00A0FC34 /* PromptsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201872BB119DF00A0FC34 /* PromptsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,8 @@
 		FFCDFD392BAE83D5008E88CA /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		FFCDFD3B2BAE941C008E88CA /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		FFE2017C2BB0D3FE00A0FC34 /* ResultChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultChartView.swift; sourceTree = "<group>"; };
+		FFE201812BB0DF9C00A0FC34 /* HistoryStatsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStatsResult.swift; sourceTree = "<group>"; };
+		FFE201872BB119DF00A0FC34 /* PromptsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,12 +120,11 @@
 		FF49A4B32BB0BB5300950FFD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FF5B2CF22BAE03E900B18431 /* GameView.swift */,
-				FF49A4B12BB0BB3F00950FFD /* GameViewModel.swift */,
-				FFE2017C2BB0D3FE00A0FC34 /* ResultChartView.swift */,
-				FF5B2CBF2BADF7FD00B18431 /* ProgressView.swift */,
-				FF5B2CF02BAE02E900B18431 /* PromptsView.swift */,
-				FFCDFD3B2BAE941C008E88CA /* HistoryView.swift */,
+				FFE201832BB1186E00A0FC34 /* Game */,
+				FFE201852BB119C900A0FC34 /* Progress */,
+				FFE201842BB119C300A0FC34 /* Prompts */,
+				FFE201862BB119D100A0FC34 /* History */,
+				FF1C8A4B2BAEA78F00B4489E /* Common */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -151,7 +154,6 @@
 			children = (
 				FF5B2CBD2BADF7FD00B18431 /* iStudyApp.swift */,
 				FF49A4B32BB0BB5300950FFD /* Views */,
-				FF1C8A4B2BAEA78F00B4489E /* Common */,
 				FF5B2D022BAE6D1200B18431 /* Resources */,
 				FF5B2CF72BAE1F9A00B18431 /* Extensions */,
 				FF5B2CE92BADF92400B18431 /* Models */,
@@ -201,6 +203,7 @@
 			children = (
 				FF5B2CF52BAE0B7700B18431 /* SeedDataManager.swift */,
 				FF5B2CFA2BAE204C00B18431 /* PersistenceManager.swift */,
+				FFE201802BB0DF8A00A0FC34 /* Models */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -224,6 +227,49 @@
 				FF1C8A4E2BAEB1F000B4489E /* BorderRadius.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		FFE201802BB0DF8A00A0FC34 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FFE201812BB0DF9C00A0FC34 /* HistoryStatsResult.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FFE201832BB1186E00A0FC34 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				FF5B2CF22BAE03E900B18431 /* GameView.swift */,
+				FF49A4B12BB0BB3F00950FFD /* GameViewModel.swift */,
+				FFE2017C2BB0D3FE00A0FC34 /* ResultChartView.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		FFE201842BB119C300A0FC34 /* Prompts */ = {
+			isa = PBXGroup;
+			children = (
+				FF5B2CF02BAE02E900B18431 /* PromptsView.swift */,
+				FFE201872BB119DF00A0FC34 /* PromptsViewModel.swift */,
+			);
+			path = Prompts;
+			sourceTree = "<group>";
+		};
+		FFE201852BB119C900A0FC34 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				FF5B2CBF2BADF7FD00B18431 /* ProgressView.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		FFE201862BB119D100A0FC34 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				FFCDFD3B2BAE941C008E88CA /* HistoryView.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,7 +411,9 @@
 				FF5B2CC02BADF7FD00B18431 /* ProgressView.swift in Sources */,
 				FF5B2CC22BADF7FD00B18431 /* Category.swift in Sources */,
 				FF5B2CF12BAE02E900B18431 /* PromptsView.swift in Sources */,
+				FFE201822BB0DF9C00A0FC34 /* HistoryStatsResult.swift in Sources */,
 				FFCDFD3A2BAE83D5008E88CA /* QuestionView.swift in Sources */,
+				FFE201882BB119DF00A0FC34 /* PromptsViewModel.swift in Sources */,
 				FFCDFD3C2BAE941C008E88CA /* HistoryView.swift in Sources */,
 				FF5B2CF32BAE03E900B18431 /* GameView.swift in Sources */,
 				FF5B2CBE2BADF7FD00B18431 /* iStudyApp.swift in Sources */,

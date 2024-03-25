@@ -18,7 +18,7 @@ final class SeedDataManager {
         do {            
             let categories = try modelContext.fetch(descriptor)
             
-            if categories.count == 0 {
+            if categories.count != defaultCategories.count {
                 for category in defaultCategories {
                     modelContext.insert(category)
                 }
@@ -33,14 +33,14 @@ final class SeedDataManager {
     // MARK: - Categories
     
     private static var defaultCategories: [Category] = [
-        Category(name: "SwiftUI", prompts: swiftUIPrompts),
-        Category(name: "CoreData", prompts: coreDataPrompts),
-        Category(name: "Animations", prompts: animationPrompts),
-        Category(name: "Networking", prompts: networkingPrompts),
+//        Category(name: "SwiftUI", prompts: swiftUIPrompts),
+//        Category(name: "CoreData", prompts: coreDataPrompts),
+//        Category(name: "Animations", prompts: animationPrompts),
+//        Category(name: "Networking", prompts: networkingPrompts),
         Category(name: "Concurrency", prompts: concurrencyPrompts),
-        Category(name: "App Architecture", prompts: appArchitecturePrompts),
-        Category(name: "Design Patterns", prompts: designPatternsPrompts),
-        Category(name: "Memory Management", prompts: memoryManagementPrompts)
+//        Category(name: "App Architecture", prompts: appArchitecturePrompts),
+//        Category(name: "Design Patterns", prompts: designPatternsPrompts),
+//        Category(name: "Memory Management", prompts: memoryManagementPrompts)
     ]
     
     // MARK: - Prompts

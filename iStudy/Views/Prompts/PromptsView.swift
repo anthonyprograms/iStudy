@@ -13,8 +13,9 @@ struct PromptsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var history: [History]
     
+    @StateObject private var viewModel = PromptsViewModel()
+    
     let category: Category
-    @State private var selection: Choice?
     
     private var completedPrompts: [Prompt] {
         let historyPromptIds = Set(history.map { $0.promptId })
@@ -31,6 +32,9 @@ struct PromptsView: View {
         }
         .listStyle(.plain)
         .navigationBarTitle("Questions", displayMode: .inline)
+        .onAppear {
+            viewModel.history = history
+        }
     }
     
     private var noPromptsView: some View {
@@ -46,8 +50,8 @@ struct PromptsView: View {
         List {
             ForEach(completedPrompts) { prompt in
                 NavigationLink(
-                    destination: HistoryView(prompt: prompt, selection: $selection).onAppear {
-                        updateSelection(for: prompt)
+                    destination: HistoryView(prompt: prompt, selection: $viewModel.selection).onAppear {
+                        viewModel.updateSelection(for: prompt)
                     },
                     label: {
                         HStack {
@@ -63,15 +67,6 @@ struct PromptsView: View {
                 )
             }
         }
-    }
-
-    private func updateSelection(for prompt: Prompt) {
-        guard
-            let pastHistory = history.first(where: { $0.promptId == prompt.id }),
-            let choice = prompt.choices.first(where: { $0.text == pastHistory.selectedAnswer})
-        else { return }
-        
-        selection = choice
     }
     
     private func completionStateView(prompt: Prompt) -> some View {

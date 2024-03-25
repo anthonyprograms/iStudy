@@ -51,7 +51,7 @@ struct GameView: View {
             
             if viewModel.prompt == nil {
                 viewModel.next()
-            }
+            }            
         }
         .onChange(of: viewModel.selection) {
             guard let selection = viewModel.selection else { return }
@@ -64,12 +64,12 @@ struct GameView: View {
     
     private var gameView: some View {
         VStack {
-            Text(statsText)
+            Text("\(viewModel.unansweredQuestions) questions left")
                 .font(.caption)
                 .padding(.top, Spacing.large)
                 .padding(.bottom, Spacing.xxSmall)
             
-            Text("\(viewModel.unansweredQuestions) questions left")
+            Text(statsText)
                 .font(.caption)
                 .padding(.top, Spacing.xxSmall)
                 .padding(.bottom, Spacing.large)
@@ -106,7 +106,7 @@ struct GameView: View {
             Text("Your performance:")
                 .font(.body)
                 .padding(.top, Spacing.large)
-                
+            
             Text(statsText)
                 .font(.title)
                 .padding(.bottom, Spacing.large)
@@ -133,9 +133,13 @@ struct GameView: View {
     }
     
     private var statsText: String {
-        if let stats = persistenceManager.stats(category: nil) {
-            return stats
+        let result = persistenceManager.historyStats()
+        
+        if result.total == 0 {
+            return "Select an answer to continue"
         }
-        return "Select an answer to start"
+        
+        let percentage = Int((Double(result.resultCount) / Double(result.total)) * 100)
+        return "\(result.resultCount)/\(result.total) (\(percentage)%)"
     }
 }

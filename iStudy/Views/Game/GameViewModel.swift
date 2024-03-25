@@ -8,7 +8,7 @@
 import SwiftUI
 
 class GameViewModel: ObservableObject {
-    var persistenceManager: PersistenceManager?
+    var persistenceManager: PersistenceManagerInterface?
      
     var prompts: [Prompt] = []
     var history: [History] = [] {
@@ -59,11 +59,11 @@ class GameViewModel: ObservableObject {
     
     func startOver() -> Void {
         persistenceManager?.clearHistory()
-        prompt = nil
+        next()
+        
         selection = nil
         isGameOver = false
         
-        next()
     }
     
     /// A workaround to get the view to refresh the `statsText` after

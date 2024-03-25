@@ -19,8 +19,8 @@ struct ProgressView: View {
 
     var body: some View {
         VStack {
-            if let statsText = persistenceManager.stats(category: nil) {
-                Text (statsText)
+            if let statsText {
+                Text(statsText)
                     .font(.caption)
                     .padding()
             }
@@ -43,10 +43,21 @@ struct ProgressView: View {
             
             Spacer()
             
-            if let statsText = persistenceManager.stats(category: category) {
+            if let statsText {
                 Text(statsText)
                     .font(.caption)
             }
         }
+    }
+    
+    private var statsText: String? {
+        let result = persistenceManager.historyStats()
+        
+        if result.total == 0 {
+            return nil
+        }
+        
+        let percentage = Int((Double(result.resultCount) / Double(result.total)) * 100)
+        return "\(result.resultCount)/\(result.total) (\(percentage)%)"
     }
 }

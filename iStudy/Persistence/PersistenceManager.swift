@@ -8,12 +8,20 @@
 import SwiftUI
 import SwiftData
 
-struct PersistenceManagerKey: EnvironmentKey {
-    static let defaultValue: PersistenceManager = PersistenceManager()
+protocol PersistenceManagerInterface {
+    func historyStats() -> PersistenceManager.HistoryStatsResult
+    
+    func historyStats(category: Category) -> PersistenceManager.HistoryStatsResult
+    
+    func unansweredQuestionsCount() -> Int
+    
+    func insert(history: History) -> Void
+    
+    func clearHistory()
 }
 
 /// Helper class to interact with a `ModelContext`
-final class PersistenceManager {
+final class PersistenceManager: PersistenceManagerInterface {
     var modelContext: ModelContext?
     
     /// Removes all objects from the DB
@@ -31,25 +39,19 @@ final class PersistenceManager {
     /// Returns the number of correct answers / total answers & that ratio as a percentage
     /// e.g. 3/4 (75%)
     /// If a category is supplied, include the category's name within the predicate
-    func stats(category: Category?) -> String? {
-        var descriptor = FetchDescriptor<History>()
-        
-        if let category = category {
-            let name = category.name
-            descriptor = FetchDescriptor<History>(predicate: #Predicate {
-                $0.categoryName == name
-            })
-        }
-        
-        let total = historyCount(descriptor: descriptor)
-        
-        if total > 0 {
-            let correctCount = correctHistoryCount(category: category)
-            let percentage = Int((Double(correctCount) / Double(total)) * 100)
-            return "\(correctCount)/\(total) (\(percentage)%)"
-        }
-        
-        return nil
+    func historyStats() -> HistoryStatsResult {
+        let total = historyCount(descriptor: HistoryStatsType.none.descriptor)
+        let correctCount = historyCount(descriptor: HistoryStatsType.isCorrect(true).descriptor)
+        return HistoryStatsResult(resultCount: correctCount, total: total)
+    }
+    
+    /// Returns the number of correct answers / total answers & that ratio as a percentage
+    /// e.g. 3/4 (75%)
+    /// If a category is supplied, include the category's name within the predicate
+    func historyStats(category: Category) -> HistoryStatsResult {
+        let total = historyCount(descriptor: HistoryStatsType.category(category).descriptor)
+        let correctCount = historyCount(descriptor: HistoryStatsType.isCorrectAndCategory(true, category).descriptor)
+        return HistoryStatsResult(resultCount: correctCount, total: total)
     }
     
     /// Returns the number of total number of unanswered questions
@@ -62,33 +64,6 @@ final class PersistenceManager {
         }
         
         return 0
-    }
-}
-
-// MARK: - Prompts
-
-extension PersistenceManager {
-    /// Returns the prompt count for the descriptor
-    private func promptsCount(descriptor: FetchDescriptor<Prompt>) -> Int {
-        return (try? modelContext?.fetchCount(descriptor)) ?? 0
-    }
-}
-
-// MARK: - History
-
-extension PersistenceManager {
-    /// Returns the number of questions answered correctly
-    /// If a category is supplied, include the category's name within the predicate
-    func correctHistoryCount(category: Category?) -> Int {
-        var descriptor = FetchDescriptor<History>(predicate: #Predicate { $0.isCorrect })
-        if let category = category {
-            let name = category.name
-            descriptor = FetchDescriptor<History>(predicate: #Predicate {
-                $0.isCorrect && $0.categoryName == name
-            })
-        }
-        
-        return historyCount(descriptor: descriptor)
     }
     
     /// Inserts a history object into the model context
@@ -104,9 +79,40 @@ extension PersistenceManager {
             print("Failed to reset history.")
         }
     }
+}
+
+// MARK: - Prompts helpers
+
+extension PersistenceManager {
+    /// Returns the prompt count for the descriptor
+    private func promptsCount(descriptor: FetchDescriptor<Prompt>) -> Int {
+        return (try? modelContext?.fetchCount(descriptor)) ?? 0
+    }
+}
+
+// MARK: - History helpers
+
+extension PersistenceManager {
+    /// Returns the number of questions answered correctly
+    /// If a category is supplied, include the category's name within the predicate
+    private func correctHistoryCount(category: Category?) -> Int {
+        var descriptor = FetchDescriptor<History>(predicate: #Predicate { $0.isCorrect })
+        if let category = category {
+            let name = category.name
+            descriptor = FetchDescriptor<History>(predicate: #Predicate {
+                $0.isCorrect && $0.categoryName == name
+            })
+        }
+        
+        return historyCount(descriptor: descriptor)
+    }
     
     /// Returns the history count for the descriptor
     private func historyCount(descriptor: FetchDescriptor<History>) -> Int {
         return (try? modelContext?.fetchCount(descriptor)) ?? 0
     }
+}
+
+struct PersistenceManagerKey: EnvironmentKey {
+    static let defaultValue: PersistenceManager = PersistenceManager()
 }
