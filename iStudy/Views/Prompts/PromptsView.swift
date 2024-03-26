@@ -56,7 +56,7 @@ struct PromptsView: View {
                     label: {
                         HStack {
                             Text(prompt.question)
-                                .font(.system(size: 16.0))
+                                .font(iStudyFont.medium)
                                 .padding(.vertical, Spacing.xSmall)
                             
                             Spacer()

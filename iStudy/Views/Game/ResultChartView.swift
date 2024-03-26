@@ -8,14 +8,7 @@
 import SwiftUI
 import Charts
 
-struct ProgressChartData: Identifiable, Equatable {
-    let type: String
-    let count: Int
-
-    var id: String { return type }
-}
-
-/// Displays the list of questions that have already been answered in a category
+/// Displays the number of correctly-answered questions in each category
 struct ResultChartView: View {
     let categories: [Category]
     let history: [History]
@@ -48,5 +41,14 @@ struct ResultChartView: View {
         }
         .aspectRatio(1, contentMode: .fit)
         .padding()
+    }
+}
+
+private extension ResultChartView {
+    struct ProgressChartData: Identifiable, Equatable {
+        let type: String
+        let count: Int
+
+        var id: String { return type }
     }
 }

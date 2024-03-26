@@ -46,7 +46,7 @@ struct QuestionView: View {
                     Text(choice.text)
                         .font(iStudyFont.small)
                         .padding()
-                        .frame(minWidth: 200, maxWidth: 250)
+                        .frame(minWidth: Constants.buttonMinWidth, maxWidth: Constants.buttonMaxWidth)
                         .foregroundColor(.white)
                         .background(isChoiceSubmitted ? Color.gray : Color.blue)
                         .cornerRadius(BorderRadius.standard)
@@ -85,5 +85,12 @@ struct QuestionView: View {
                     .scaleEffect(isChoiceSubmitted ? 1.0 : 0.3)
                     .animation(.easeInOut(duration: 0.2).delay(0.2), value: 1)
         }
+    }
+}
+
+private extension QuestionView {
+    enum Constants {
+        static let buttonMinWidth: CGFloat = 200
+        static let buttonMaxWidth: CGFloat = 250
     }
 }

@@ -93,7 +93,7 @@ struct GameView: View {
                     viewModel.next()
                 }) {
                     Text("Next")
-                        .font(.system(size: 15.0))
+                        .font(iStudyFont.small)
                         .padding()
                         .frame(maxWidth: .infinity)
                         .foregroundColor(.white)
@@ -128,7 +128,7 @@ struct GameView: View {
                 viewModel.startOver()
             }) {
                 Text("Start over")
-                    .font(.system(size: 15.0))
+                    .font(iStudyFont.small)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .foregroundColor(.white)
