@@ -6,15 +6,34 @@
 //
 
 import Foundation
+import SwiftData
 @testable import iStudy
 
 final class MockPersistenceManager: PersistenceManagerInterface {
-    func historyStats() -> iStudy.PersistenceManager.HistoryStatsResult {
-        return iStudy.PersistenceManager.HistoryStatsResult(resultCount: 5, total: 10)
+    let sharedModelContainer: ModelContainer
+    
+    init() {
+        let schema = Schema([
+            Category.self,
+            Prompt.self,
+            Choice.self,
+            History.self
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+        do {
+            sharedModelContainer = try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
     }
     
-    func historyStats(category: iStudy.Category) -> iStudy.PersistenceManager.HistoryStatsResult {
-        return iStudy.PersistenceManager.HistoryStatsResult(resultCount: 4, total: 8)
+    func historyStats(correctType: iStudy.PersistenceManager.HistoryStatsType, totalType: iStudy.PersistenceManager.HistoryStatsType) -> iStudy.PersistenceManager.HistoryStatsResult {
+        iStudy.PersistenceManager.HistoryStatsResult(correct: 5, total: 10)
+    }
+    
+    func questionsCount() -> iStudy.PersistenceManager.QuestionsCount {
+        iStudy.PersistenceManager.QuestionsCount(total: 5, answered: 3, left: 2)
     }
     
     func unansweredQuestionsCount() -> Int {

@@ -39,6 +39,7 @@
 		FFE201952BB1313900A0FC34 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201942BB1313900A0FC34 /* Choice.swift */; };
 		FFE201972BB1330D00A0FC34 /* defaults.json in Resources */ = {isa = PBXBuildFile; fileRef = FFE201962BB1330D00A0FC34 /* defaults.json */; };
 		FFE201992BB209DD00A0FC34 /* QuestionsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE201982BB209DD00A0FC34 /* QuestionsCount.swift */; };
+		FFE2019B2BB3584600A0FC34 /* PersistenceManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE2019A2BB3584600A0FC34 /* PersistenceManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		FFE201942BB1313900A0FC34 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		FFE201962BB1330D00A0FC34 /* defaults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = defaults.json; sourceTree = "<group>"; };
 		FFE201982BB209DD00A0FC34 /* QuestionsCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsCount.swift; sourceTree = "<group>"; };
+		FFE2019A2BB3584600A0FC34 /* PersistenceManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 			children = (
 				FF5B2CD02BADF7FE00B18431 /* iStudyTests.swift */,
 				FFE201892BB11F7700A0FC34 /* GameViewModelTests.swift */,
+				FFE2019A2BB3584600A0FC34 /* PersistenceManagerTests.swift */,
 				FFE2018C2BB1209700A0FC34 /* Mocks */,
 			);
 			path = iStudyTests;
@@ -471,6 +474,7 @@
 				FFE2018A2BB11F7700A0FC34 /* GameViewModelTests.swift in Sources */,
 				FF5B2CD12BADF7FE00B18431 /* iStudyTests.swift in Sources */,
 				FFE2018E2BB120A300A0FC34 /* MockPersistenceManager.swift in Sources */,
+				FFE2019B2BB3584600A0FC34 /* PersistenceManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

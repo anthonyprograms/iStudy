@@ -10,7 +10,6 @@ import SwiftData
 
 /// The main view hosting the study game
 struct GameView: View {
-    @Environment(\.modelContext) var modelContext
     @Environment(\.persistenceManager) var persistenceManager
         
     @Query private var history: [History]
@@ -45,12 +44,10 @@ struct GameView: View {
                     Text("Progress")
                 }
         )
-        .modelContext(modelContext)
         .onAppear {
             guard shouldActivateGameView else  { return }
             
-            if persistenceManager.modelContext == nil || viewModel.persistenceManager == nil {
-                persistenceManager.modelContext = modelContext
+            if viewModel.persistenceManager == nil {
                 viewModel.persistenceManager = persistenceManager
             }
                         
@@ -64,7 +61,7 @@ struct GameView: View {
             viewModel.history = history
         }
         .task {
-            guard shouldActivateGameView else  { return }
+            guard shouldActivateGameView else { return }
             await viewModel.fetchData()
         }
     }

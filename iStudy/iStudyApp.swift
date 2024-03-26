@@ -10,22 +10,7 @@ import SwiftData
 
 @main
 struct iStudyApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Category.self,
-            Prompt.self,
-            Choice.self,
-            History.self
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
-            return container
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @Environment(\.persistenceManager) var persistenceManager: PersistenceManager
 
     var body: some Scene {
         WindowGroup {
@@ -34,6 +19,6 @@ struct iStudyApp: App {
                 GameView(shouldActivateGameView: !isTesting)
             }
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(persistenceManager.sharedModelContainer)
     }
 }

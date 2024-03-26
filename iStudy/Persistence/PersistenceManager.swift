@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftData
 
 protocol PersistenceManagerInterface {
+    var sharedModelContainer: ModelContainer { get }
+    
     func categories() -> [Category]
     
     func insert(category: Category) -> Void
@@ -27,15 +29,33 @@ protocol PersistenceManagerInterface {
 
 /// Helper class to interact with a `ModelContext`
 final class PersistenceManager: PersistenceManagerInterface {
-    var modelContext: ModelContext?
+    let sharedModelContainer: ModelContainer
+    private let modelContext: ModelContext
+    
+    init() {
+        let schema = Schema([
+            Category.self,
+            Prompt.self,
+            Choice.self,
+            History.self
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+        do {
+            sharedModelContainer = try ModelContainer(for: schema, configurations: [modelConfiguration])
+            modelContext = ModelContext(sharedModelContainer)
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }
     
     /// Removes all objects from the DB
     func clear() {
         do {
-            try modelContext?.delete(model: Category.self)
-            try modelContext?.delete(model: Prompt.self)
-            try modelContext?.delete(model: Choice.self)
-            try modelContext?.delete(model: History.self)
+            try modelContext.delete(model: Category.self)
+            try modelContext.delete(model: Prompt.self)
+            try modelContext.delete(model: Choice.self)
+            try modelContext.delete(model: History.self)
         } catch {
             print("Failed to clear database.")
         }
@@ -46,25 +66,25 @@ final class PersistenceManager: PersistenceManagerInterface {
     /// Returns all`Category` rows that exist
     func categories() -> [Category] {
         let descriptor = FetchDescriptor<Category>()
-        return (try? modelContext?.fetch(descriptor)) ?? []
+        return (try? modelContext.fetch(descriptor)) ?? []
     }
     
     /// Inserts a `Category` object into the model context
     func insert(category: Category) -> Void {
-        modelContext?.insert(category)
+        modelContext.insert(category)
     }
     
     // MARK: - History
     
     /// Inserts a `History` object into the model context
     func insert(history: History) -> Void {
-        modelContext?.insert(history)
+        modelContext.insert(history)
     }
     
     /// Removes all `History` objects from the DB
     func clearHistory() {
         do {
-            try modelContext?.delete(model: History.self)
+            try modelContext.delete(model: History.self)
         } catch {
             print("Failed to reset history.")
         }
@@ -104,7 +124,7 @@ final class PersistenceManager: PersistenceManagerInterface {
 extension PersistenceManager {
     /// Returns the prompt count for the descriptor
     private func promptsCount(descriptor: FetchDescriptor<Prompt>) -> Int {
-        return (try? modelContext?.fetchCount(descriptor)) ?? 0
+        return (try? modelContext.fetchCount(descriptor)) ?? 0
     }
 }
 
@@ -127,7 +147,7 @@ extension PersistenceManager {
     
     /// Returns the history count for the descriptor
     private func historyCount(descriptor: FetchDescriptor<History>) -> Int {
-        return (try? modelContext?.fetchCount(descriptor)) ?? 0
+        return (try? modelContext.fetchCount(descriptor)) ?? 0
     }
 }
 
