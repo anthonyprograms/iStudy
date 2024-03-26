@@ -221,7 +221,6 @@
 		FF5B2CF42BAE0B4B00B18431 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				FFE201962BB1330D00A0FC34 /* defaults.json */,
 				FF5B2CFA2BAE204C00B18431 /* PersistenceManager.swift */,
 				FFE201802BB0DF8A00A0FC34 /* Models */,
 			);
@@ -304,6 +303,7 @@
 		FFE2018F2BB12D6D00A0FC34 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				FFE201962BB1330D00A0FC34 /* defaults.json */,
 				FFE201902BB12D8B00A0FC34 /* NetworkManager.swift */,
 			);
 			path = Networking;
